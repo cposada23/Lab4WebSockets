@@ -11,9 +11,15 @@ var websocket = new WebSocket(wsUri);
 
 var username;
 
-websocket.onopen = function(evt ){OnOpen(evt)};
-websocket.onmessage = function(evt ){OnMessage(evt)};
-websocket.onerror = function(evt ){OnError(evt)};
+websocket.onopen = function(evt){
+    OnOpen(evt);
+};
+websocket.onmessage = function(evt){
+    OnMessage(evt);
+};
+websocket.onerror = function(evt){
+    OnError(evt);
+};
 
 //Aca mando los mensages en el formulario HTML
 var output = document.getElementById("output");
@@ -43,4 +49,14 @@ function OnMessage(evt){
     }else{
         chatlogField.innerHTML += evt.data+"\n";        
     }
+}
+
+function OnError(evt){
+    writeToScreen('<span style = "color:red;">ERROR:</span>' + evt.data);
+    
+}
+
+function writeToScreen(message){
+    
+    output.innerHTML+=message+"<br>";
 }
